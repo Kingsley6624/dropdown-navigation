@@ -2,7 +2,7 @@ import React from "react";
 import { FaChevronUp } from "react-icons/fa";
 import { FaChevronDown } from "react-icons/fa";
 import { IoIosMenu } from "react-icons/io";
-import { IoCloseOutline } from "react-icons/io5";
+
 
 
 import logo from "../assets/icons/logo.svg";
@@ -11,17 +11,20 @@ import calendar from "../assets/icons/icon-calendar.svg";
 import reminders from "../assets/icons/icon-reminders.svg";
 import planning from "../assets/icons/icon-planning.svg"; 
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { NavLink, Link } from "react-router-dom";
 
-const NavBar = () => {
+const NavBar = ({ setOpenMenu, openMenu }) => {
+  const navigate = useNavigate();
   const [openFeature, setOpenFeature] = useState(false);
   const [openCompany, setOpenCompany] = useState(false);
-  const [openMenu, setOpenMenu] = useState(false);
+  
   return (
     <nav>
-      <div className="flex items-center justify-between px-[5.55%] py-4 text-[#696969ff] font-medium text-lg">
-        <div className="flex items-center gap-16">
-          <span><img src={logo} alt="" /></span>
-          <ul className="hidden md:flex items-center gap-12 ">
+      <div className="flex items-center justify-between px-[5%] py-4 text-[#696969ff] font-medium text-lg z-50 mt-2">
+        <div className="flex items-center gap-12">
+          <span onClick={() => navigate('/')} ><img src={logo} alt="" /></span>
+          <ul className="hidden md:flex items-center gap-4">
             <li className="relative">
               <button className="flex items-end p-1 gap-1 active:text-[#141414ff]" 
               onClick={() => setOpenFeature((prev) => !prev)}>
@@ -30,28 +33,28 @@ const NavBar = () => {
               {openFeature && (
                 <ul className="absolute right-0 mt-2 bg-white border border-gray-200 rounded-lg shadow-lg w-32 py-2 text-[#696969ff]">
                   <li>
-                    <a className="flex gap-2 px-5 py-2 text-sm hover:bg-gray-100" href="/feature/1">
+                    <Link className="flex gap-2 px-5 py-2 text-sm hover:bg-gray-100" to="/feature/1">
                       <img src={todo} alt="" />
                       <span className="whitespace-nowrap">Todo List</span>
-                    </a>
+                    </Link>
                   </li>
                   <li>
-                    <a className="flex gap-2 px-5 py-2 text-sm hover:bg-gray-100" href="/feature/2">
+                    <Link className="flex gap-2 px-5 py-2 text-sm hover:bg-gray-100" to="/feature/2">
                       <img src={calendar} alt="" />
                       <span className="whitespace-nowrap">Calendar</span>
-                    </a>
+                    </Link>
                   </li>
                   <li>
-                    <a className="flex gap-2 px-5 py-2 text-sm hover:bg-gray-100" href="/feature/3">
+                    <Link className="flex gap-2 px-5 py-2 text-sm hover:bg-gray-100" to="/feature/3">
                       <img src={reminders} alt="" />
                       <span className="whitespace-nowrap">Reminders</span>
-                    </a>
+                    </Link>
                   </li>
                   <li>
-                    <a className="flex gap-2 px-5 py-2 text-sm text-gray-700 hover:bg-gray-100" href="/feature/4">
+                    <Link className="flex gap-2 px-5 py-2 text-sm text-gray-700 hover:bg-gray-100" to="/feature/4">
                       <img src={planning} alt="" />
                       <span className="whitespace-nowrap">Planning</span>
-                    </a>
+                    </Link>
                   </li>
                 </ul>
               )}
@@ -63,32 +66,32 @@ const NavBar = () => {
               {openCompany && (
                 <ul className="absolute left-0 mt-2  bg-white border border-gray-200 rounded-lg shadow-lg py-2 text-[#696969ff] ">
                   <li>
-                    <a className="block px-5 py-2 text-sm hover:bg-gray-100" href="/company/history">
+                    <Link className="block px-5 py-2 text-sm hover:bg-gray-100" to="/company/history">
                       History
-                    </a>
+                    </Link>
                   </li>
                   <li>
-                    <a className="block px-5 py-2 text-sm hover:bg-gray-100" href="/company/team">
+                    <Link className="block px-5 py-2 text-sm hover:bg-gray-100" to="/company/team">
                       Our Team
-                    </a>
+                    </Link>
                   </li>
                   <li>
-                    <a className="block px-5 py-2 text-sm hover:bg-gray-100" href="/company/blog">
+                    <NavLink className="block px-5 py-2 text-sm hover:bg-gray-100" to="/company/blog">
                       Blog
-                    </a>
+                    </NavLink>
                   </li>
                 </ul>
               )}
             </li>
             <li>
-              <a className="flex items-end p-1 gap-1" href="/careers">
+              <NavLink className="flex items-end p-1 gap-1" to="/careers">
                 Careers
-              </a>
+              </NavLink>
             </li>
             <li>
-              <a className="flex items-end p-1 active:text-[#141414ff]" href="/about">
+              <NavLink className="flex items-end p-1 active:text-[#141414ff]" to="/about">
                 About
-              </a>
+              </NavLink>
             </li>
           </ul>
         </div>
@@ -98,8 +101,7 @@ const NavBar = () => {
           <button className="bg-transparent border-2 border-[#696969ff] py-1 px-4 rounded-xl active:text-[#141414ff]">Register</button>
         </div>
         <div className="md:hidden">
-          <button className="bg-transparent p-2 text-[#696969ff] text-4xl"
-          onClick={() => setOpenMenu((prev)=> !prev)}>
+          <button className='bg-white p-2 text-[#696969ff] text-4xl' onClick={() => setOpenMenu(true)}>
             <IoIosMenu />
           </button>
         </div>
